@@ -7,27 +7,15 @@
 </template>
 
 <script>
-
-import { getImages } from '@/api/home'
 import ImageList from '@/components/ImageList.vue'
 
 export default {
-  name: 'CategoryPage',
+  name: 'ImageHubPage',
   components: { ImageList },
   created () {
-    console.log('category')
-  },
-  data () {
-    return {
-      page: 0,
-      imageList1: []
-    }
+    console.log('imageHub')
   },
   methods: {
-    async renderImage () {
-      const data = await getImages(this.page)
-      this.imageList1 = data.images
-    }
   }
 }
 </script>

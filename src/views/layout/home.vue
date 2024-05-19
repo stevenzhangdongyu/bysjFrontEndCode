@@ -10,8 +10,7 @@
 </template>
 
 <script>
-// import GoodsItem from '@/components/GoodsItem.vue'
-// import { getHomeData, getImages } from '@/api/home'
+
 import { mapGetters } from 'vuex'
 import { predictImages } from '@/api/home'
 import ResultImageList from '@/components/ResultImageList.vue'

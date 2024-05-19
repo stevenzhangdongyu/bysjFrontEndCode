@@ -1,14 +1,6 @@
-import request from '@/utils/request'
 import axios from 'axios'
 // import store from '@/store'
 // 获取首页数据
-export const getHomeData = () => {
-  return request.get('/page/detail', {
-    params: {
-      pageId: 0
-    }
-  })
-}
 
 export const getImages = (page) => {
   return axios.get('http://127.0.0.1:5000/get_images/' + page)
