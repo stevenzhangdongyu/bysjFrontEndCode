@@ -1,0 +1,33 @@
+import request from '@/utils/request'
+import axios from 'axios'
+// import store from '@/store'
+// 获取首页数据
+export const getHomeData = () => {
+  return request.get('/page/detail', {
+    params: {
+      pageId: 0
+    }
+  })
+}
+
+export const getImages = (page) => {
+  return axios.get('http://127.0.0.1:5000/get_images/' + page)
+    .then(response => response.data)
+    .catch(error => {
+      console.error('Error fetching images:', error)
+      throw error
+    })
+}
+
+export const predictImages = (uploadImages) => {
+  return axios.post('http://127.0.0.1:5000/predict', {
+    uploadImages: uploadImages
+  }).then((response) => {
+    // store.state['images/resultImages'] = response.data.data
+    return response
+  })
+    .catch(error => {
+      console.error('Error fetching images:', error)
+      throw error
+    })
+}
