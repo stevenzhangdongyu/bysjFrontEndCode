@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <!-- 导航条 -->
-    <van-nav-bar title="DETR道路标志牌检测系统" fixed />
+    <van-nav-bar title="DETR道路交通标志牌检测系统" fixed />
     <van-uploader v-model="choosedImages" :after-read="afterRead"  multiple />
     <van-button type="danger" @click="startAnalyse">开始检测</van-button>
     <van-loading v-if="load" type="spinner"></van-loading>
@@ -48,7 +48,7 @@ export default {
     },
     afterRead (file) {
       // 此时可以自行将文件上传至服务器
-      console.log(this.fileList)
+      console.log(file)
     },
     async startAnalyse (e) {
       this.load = true

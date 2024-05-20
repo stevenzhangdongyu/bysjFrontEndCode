@@ -1,9 +1,10 @@
 <template>
   <div class="image-list-container">
     <van-row type="flex" justify="start" gutter="10">
-      <van-col v-for="(image, index) in this.$store.state['images/resultImages']" :key="index" span="8">
+      <van-col v-for="(image, index) in this.$store.state['images/resultImages']" :key="index" span="6">
         <div class="image-container" @click="checkImage(index)">
-          <van-image :src="image" width="100%" height="100%" />
+            <van-image :src="image || require('@/assets/failed.jpeg')" width="100%" height="100%">
+            </van-image>
         </div>
       </van-col>
     </van-row>
@@ -39,9 +40,10 @@ export default {
 .image-container {
   position: relative;
   width: 100%;
+  height: 0;
   padding-top: 100%; /* 1:1 Aspect Ratio */
 }
-.image-container img {
+.image-container .van-image {
   position: absolute;
   top: 0;
   left: 0;

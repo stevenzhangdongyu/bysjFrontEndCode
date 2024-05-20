@@ -9,11 +9,11 @@
           </div>
         </van-col>
       </van-row>
-    </div>
-    <div class="button-container">
-      <van-button type="primary" @click="saveSelection">清空</van-button>
-      <van-button type="info" @click= "prePage" >上一页</van-button>
-      <van-button type="warning" @click= "nextPage" > 下一页</van-button>
+      <div class="button-container">
+        <van-button type="primary" @click="saveSelection">清空</van-button>
+        <van-button type="info" @click= "prePage" >上一页</van-button>
+        <van-button type="warning" @click= "nextPage" > 下一页</van-button>
+      </div>
     </div>
   </div>
 </template>
@@ -33,7 +33,7 @@ export default {
     ...mapGetters('images', ['originalImages', 'selectedImages', 'page'])
   },
   methods: {
-    ...mapActions('images', ['fetchImages', 'selectImage', 'deselectImage', 'pageUp', 'pageDown', 'clearSelectedImages']),
+    ...mapActions('images', ['fetchImages', 'selectImage', 'deselectImage', 'pageUp', 'pageDown', 'clearSelectedImages', 'clearRes']),
     isSelected (index) {
       return this.selectedImages.includes(this.originalImages[index])
     },
@@ -63,7 +63,7 @@ export default {
     async reRender () {
       const temp = []
       this.originalImages = await getImages(this.page)
-      for (let i = 0; i < 10; i++) {
+      for (let i = 0; i < 9; i++) {
         if (this.selectedImages.includes(this.originalImages[i])) {
           temp.push(true)
         } else {
@@ -96,7 +96,7 @@ export default {
 .button-container {
   padding: 10px;
   background-color: #fff;
-  margin-bottom: 15rch;
+  margin-bottom: 25rch;
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
 }
 

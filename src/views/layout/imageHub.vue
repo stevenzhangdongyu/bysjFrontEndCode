@@ -79,6 +79,10 @@ export default {
 // 导航条样式定制
 .van-nav-bar {
   z-index: 999;
+  background-color: #c21401;
+  ::v-deep .van-nav-bar__title {
+    color: #fff;
+  }
 }
 
 // 搜索框样式定制

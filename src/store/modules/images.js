@@ -26,6 +26,9 @@ const mutations = {
   },
   CLEAR_SELECT_IMAGES (state) {
     state.selectedImages = []
+  },
+  CLEAR_RES (state) {
+    state.resultImages = []
   }
 }
 
@@ -47,7 +50,7 @@ const actions = {
     }
   },
   pageUp ({ commit }) {
-    if (state.page < 10) {
+    if (state.page < 20) {
       commit('SET_PAGE', state.page + 1)
     }
   },
@@ -56,6 +59,9 @@ const actions = {
   },
   clearSelectedImages ({ commit }) {
     commit('CLEAR_SELECT_IMAGES')
+  },
+  clearRes ({ commit }) {
+    commit('CLEAR_RES')
   }
 }
 

@@ -3,7 +3,7 @@ import axios from 'axios'
 // 获取首页数据
 
 export const getImages = (page) => {
-  return axios.get('http://127.0.0.1:5000/get_images/' + page)
+  return axios.get('http://116.63.35.72:5000/get_images/' + page)
     .then(response => response.data)
     .catch(error => {
       console.error('Error fetching images:', error)
@@ -12,7 +12,7 @@ export const getImages = (page) => {
 }
 
 export const predictImages = (uploadImages) => {
-  return axios.post('http://127.0.0.1:5000/predict', {
+  return axios.post('http://116.63.35.72:5000/predict', {
     uploadImages: uploadImages
   }).then((response) => {
     // store.state['images/resultImages'] = response.data.data
