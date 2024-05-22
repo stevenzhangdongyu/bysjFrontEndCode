@@ -5,7 +5,9 @@ const state = {
   selectedImages: [],
   originalImages: [],
   resultImages: [],
-  page: 0
+  page: 0,
+  maxPage: 0,
+  selectedFiles: []
 }
 
 const mutations = {
@@ -29,14 +31,43 @@ const mutations = {
   },
   CLEAR_RES (state) {
     state.resultImages = []
+  },
+  SET_MAX_PAGE (state, maxPage) {
+    state.maxPage = maxPage
+  },
+  SET_SELECTED_FILES (state, files) {
+    console.log('selected files mutations begin')
+    state.selectedFiles = files
+    console.log(state.selectedFiles)
+    console.log('selected files mutations end')
+  },
+  SET_ORIGINAL_IMAGES (state, imgs) {
+    state.originalImages = imgs
   }
 }
 
 const actions = {
-  async fetchImages ({ commit }) {
+  async fetchImages ({ commit }, tune) {
     // 模拟从后端获取图片列表
-    const imgs = await getImages(state.page)
-    commit('SET_IMAGES', imgs.images)
+    if (state.page + tune < 0) {
+      return 'no'
+    }
+    const response = await getImages(state.page + tune)
+    if (response.status === 'yes') {
+      commit('SET_IMAGES', response.images)
+      state.page = state.page + tune
+      state.maxPage = response.maxPage
+    }
+    return response.status
+  },
+  async fetchImagesAt ({ commit }, page) {
+    const response = await getImages(page)
+    if (response.data.status === 'yes') {
+      commit('SET_IMAGES', response.data.images)
+      state.page = page
+      state.maxPage = response.data.maxPage
+    }
+    return response.data.status
   },
   selectImage ({ commit }, image) {
     commit('SELECT_IMAGE', image)
@@ -50,9 +81,7 @@ const actions = {
     }
   },
   pageUp ({ commit }) {
-    if (state.page < 20) {
-      commit('SET_PAGE', state.page + 1)
-    }
+    commit('SET_PAGE', state.page + 1)
   },
   setRes ({ commit }, imgs) {
     commit('SET_RES', imgs)
@@ -62,6 +91,18 @@ const actions = {
   },
   clearRes ({ commit }) {
     commit('CLEAR_RES')
+  },
+  setMaxPage ({ commit }, maxPage) {
+    commit('SET_MAX_PAGE', maxPage)
+  },
+  setSelectedFiles ({ commit }, files) {
+    commit('SET_SELECTED_FILES', files)
+  },
+  setOriginalImages ({ commit }, imgs) {
+    commit('SET_ORIGINAL_IMAGES', imgs)
+  },
+  setPage ({ commit }, p) {
+    commit('SET_PAGE', p)
   }
 }
 
@@ -69,7 +110,9 @@ const getters = {
   originalImages: state => state.originalImages,
   selectedImages: state => state.selectedImages,
   page: state => state.page,
-  resultImages: state => state.resultImages
+  resultImages: state => state.resultImages,
+  maxPage: state => state.maxPage,
+  selectedFiles: state => state.selectedFiles
 }
 
 export default {

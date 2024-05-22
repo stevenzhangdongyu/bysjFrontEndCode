@@ -1,4 +1,4 @@
-import { Button, Loading, ImagePreview, Switch, Col, Row, Rate, Uploader, Tabbar, TabbarItem, NavBar, Image, Toast, Search, Swipe, SwipeItem, Grid, GridItem, Icon, Lazyload, ActionSheet, Dialog, Checkbox, Tab, Tabs } from 'vant'
+import { Button, Loading, Progress, ImagePreview, Switch, Col, Row, Rate, Uploader, Tabbar, TabbarItem, NavBar, Image, Toast, Search, Swipe, SwipeItem, Grid, GridItem, Icon, Lazyload, ActionSheet, Dialog, Checkbox, Tab, Tabs } from 'vant'
 import Vue from 'vue'
 Vue.use(Toast)
 Vue.use(NavBar)
@@ -25,3 +25,4 @@ Vue.use(Row)
 Vue.use(Col)
 Vue.use(ImagePreview)
 Vue.use(Loading)
+Vue.use(Progress)

@@ -3,6 +3,7 @@
     <!-- 分类 -->
     <van-nav-bar title="图片库" fixed />
     <ImageList></ImageList>
+
   </div>
 </template>
 
@@ -16,6 +17,7 @@ export default {
     console.log('imageHub')
   },
   methods: {
+
   }
 }
 </script>

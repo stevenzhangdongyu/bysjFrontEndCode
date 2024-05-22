@@ -2,7 +2,15 @@
   <div class="home">
     <!-- 导航条 -->
     <van-nav-bar title="DETR道路交通标志牌检测系统" fixed />
-    <van-uploader v-model="choosedImages" :after-read="afterRead"  multiple />
+    <div class="image-list-container">
+      <van-row type="flex" justify="start" gutter="10">
+        <van-col v-for="(image, index) in selectedImages" :key="index" span="6">
+          <div class="image-container" @click="previewSelectedImage(index)">
+            <van-image :src="image" width="100%" height="100%"/>
+          </div>
+        </van-col>
+      </van-row>
+    </div>
     <van-button type="danger" @click="startAnalyse">开始检测</van-button>
     <van-loading v-if="load" type="spinner"></van-loading>
     <result-image-list></result-image-list>
@@ -14,7 +22,7 @@
 import { mapGetters } from 'vuex'
 import { predictImages } from '@/api/home'
 import ResultImageList from '@/components/ResultImageList.vue'
-import { Toast } from 'vant'
+import { ImagePreview, Toast } from 'vant'
 
 export default {
   name: 'HomePage',
@@ -24,14 +32,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('images', ['selectedImages', 'resultImages']),
-    choosedImages () {
-      const data = []
-      for (let i = 0; i < this.selectedImages.length; i++) {
-        data.push({ url: this.selectedImages[i] })
-      }
-      return data
-    }
+    ...mapGetters('images', ['selectedImages', 'resultImages'])
   },
   components: {
     ResultImageList
@@ -39,16 +40,15 @@ export default {
   async created () {
   },
   methods: {
+    previewSelectedImage (index) {
+      ImagePreview({ images: this.selectedImages, startPosition: index })
+    },
     forceUpdateAll () {
       const updateChildren = (vm) => {
         vm.$forceUpdate()
         vm.$children.forEach(updateChildren)
       }
       updateChildren(this)
-    },
-    afterRead (file) {
-      // 此时可以自行将文件上传至服务器
-      console.log(file)
     },
     async startAnalyse (e) {
       this.load = true
